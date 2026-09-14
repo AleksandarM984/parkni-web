@@ -107,14 +107,18 @@ button[data-plan] {
 .hero {
   min-height: 540px;
   position: relative;
-  background: linear-gradient(90deg, #071425 0%, #102744b8 52%, #0a244955),
-    url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1800&q=80') center/cover;
+  background-color: #071425;
+  background-image: url('assets/hero/parkni-zvezda-zalgiris-event.png');
+  background-repeat: no-repeat;
+  background-size: auto 112%;
+  background-position: right 68%;
 }
 
 .shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #071426ee 0%, #0a1d33a8 52%, #061b3440);
+  pointer-events: none;
+  background: linear-gradient(90deg, #071426d8 0%, #07142699 34%, #07142633 52%, transparent 68%);
 }
 
 .hero-inner {
@@ -469,6 +473,12 @@ footer {
 
   .hero {
     min-height: 570px;
+    background-size: cover;
+    background-position: 82% center;
+  }
+
+  .shade {
+    background: linear-gradient(90deg, #071426ee 0%, #071426b8 42%, #0714264d 68%, transparent 86%);
   }
 
   .hero-inner {
