@@ -243,9 +243,10 @@ button[data-plan] {
   padding: 25px;
   position: relative;
   box-shadow: 0 6px 20px #10213d0a;
+  cursor: pointer;
 }
 
-.plan.featured {
+.plan.selected {
   border: 2px solid var(--blue);
   transform: translateY(-7px);
 }
@@ -303,9 +304,15 @@ button[data-plan] {
   color: var(--navy);
 }
 
-.featured button {
+.plan.selected button {
   background: var(--blue);
   color: white;
+}
+
+@media (hover: hover) {
+  .plan:hover {
+    box-shadow: 0 10px 28px #10213d14;
+  }
 }
 
 .how {
@@ -529,8 +536,11 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .plan.featured {
+  .plan.recommended {
     order: -1;
+  }
+
+  .plan.selected {
     transform: none;
   }
 

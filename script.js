@@ -4,14 +4,26 @@ const planInput = document.querySelector('#planInput');
 const form = document.querySelector('#leadForm');
 const success = document.querySelector('.success');
 
-document.querySelectorAll('[data-plan]').forEach(btn => btn.addEventListener('click', () => {
+function selectPlan(card, btn) {
+  document.querySelectorAll('.plan.selected').forEach(plan => {
+    plan.classList.remove('selected');
+  });
+  card.classList.add('selected');
+
   title.textContent = `${btn.dataset.plan} · ${Number(btn.dataset.price).toLocaleString('sr-RS')} RSD`;
   planInput.value = btn.dataset.plan;
   form.hidden = false;
   success.hidden = true;
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
-}));
+}
+
+document.querySelectorAll('.plan').forEach(card => {
+  card.addEventListener('click', () => {
+    const btn = card.querySelector('[data-plan]');
+    if (btn) selectPlan(card, btn);
+  });
+});
 
 function close() {
   modal.classList.remove('open');
