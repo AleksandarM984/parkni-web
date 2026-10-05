@@ -486,7 +486,12 @@ footer {
   }
 
   .hero h1 {
-    font-size: 42px;
+    font-size: 34px;
+    line-height: 1.12;
+  }
+
+  .hero h1 br {
+    display: none;
   }
 
   .lead {
@@ -510,6 +515,12 @@ footer {
     align-items: flex-start;
   }
 
+  .section-head .kicker {
+    font-size: 11px;
+    letter-spacing: .06em;
+    line-height: 1.5;
+  }
+
   .datebox {
     display: none;
   }
@@ -528,7 +539,7 @@ footer {
   }
 
   .steps {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .faq {
