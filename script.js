@@ -2,7 +2,9 @@ const modal = document.querySelector('#modal');
 const title = document.querySelector('#modalTitle');
 const planInput = document.querySelector('#planInput');
 const form = document.querySelector('#leadForm');
+const intro = document.querySelector('#modalIntro');
 const success = document.querySelector('.success');
+const successPlan = document.querySelector('#successPlan');
 
 function selectPlan(card, btn) {
   document.querySelectorAll('.plan.selected').forEach(plan => {
@@ -12,7 +14,9 @@ function selectPlan(card, btn) {
 
   title.textContent = `${btn.dataset.plan} · ${Number(btn.dataset.price).toLocaleString('sr-RS')} RSD`;
   planInput.value = btn.dataset.plan;
+  successPlan.textContent = btn.dataset.plan;
   form.hidden = false;
+  intro.hidden = false;
   success.hidden = true;
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
@@ -44,5 +48,6 @@ form.addEventListener('submit', e => {
   data.plan = planInput.value;
   console.log('lead_submitted', data);
   form.hidden = true;
+  intro.hidden = true;
   success.hidden = false;
 });

@@ -180,9 +180,9 @@
   <div class='modal' id='modal' aria-hidden='true'>
     <div class='modal-card'>
       <button class='close' aria-label='Zatvori'>×</button>
-      <span class='kicker'>PARKNI VALIDACIJA</span>
+      <span class='kicker'>IZABRANI PARKING</span>
       <h2 id='modalTitle'>Standard · 990 RSD</h2>
-      <p>Ostavi kontakt ako bi želeo ovaj parking za Zvezda – Žalgiris. Ovo nije naplata niti potvrđena rezervacija.</p>
+      <p id='modalIntro'>Ostavi kontakt ako bi želeo ovaj parking za Zvezda – Žalgiris. Ovo nije naplata niti potvrđena rezervacija.</p>
       <form id='leadForm'>
         <input type='hidden' id='planInput'>
         <label>Ime<input required name='name' autocomplete='name' placeholder='Aleksandar'></label>
@@ -191,7 +191,8 @@
       </form>
       <div class='success' hidden>
         <h3>Hvala! ✓</h3>
-        <p>Interesovanje je zabeleženo lokalno za demo verziju. Sledeći korak je povezivanje forme sa pravim servisom i analitikom.</p>
+        <p>Zabeležili smo tvoje interesovanje za <span id='successPlan'></span> parking.
+          Obavestićemo te kada parking za ovaj događaj bude dostupan.</p>
       </div>
     </div>
   </div>
