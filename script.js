@@ -6,20 +6,45 @@ const intro = document.querySelector('#modalIntro');
 const success = document.querySelector('.success');
 const successPlan = document.querySelector('#successPlan');
 
+const PLAN_IDS = ['Basic', 'Standard', 'Premium'];
+let selectedPlan = '';
+let selectedPrice = NaN;
+let interestEventSent = false;
+
+function sendAnalyticsEvent(name, plan, price) {
+  if (!window.parkniAnalyticsEnabled || typeof gtag !== 'function') return false;
+  if (!PLAN_IDS.includes(plan) || !Number.isFinite(price) || price <= 0) return false;
+
+  try {
+    gtag('event', name, {
+      plan: plan,
+      price_rsd: price
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 function selectPlan(card, btn) {
   document.querySelectorAll('.plan.selected').forEach(plan => {
     plan.classList.remove('selected');
   });
   card.classList.add('selected');
 
-  title.textContent = `${btn.dataset.plan} · ${Number(btn.dataset.price).toLocaleString('sr-RS')} RSD`;
-  planInput.value = btn.dataset.plan;
-  successPlan.textContent = btn.dataset.plan;
+  selectedPlan = btn.dataset.plan;
+  selectedPrice = Number(btn.dataset.price);
+
+  title.textContent = `${selectedPlan} · ${selectedPrice.toLocaleString('sr-RS')} RSD`;
+  planInput.value = selectedPlan;
+  successPlan.textContent = selectedPlan;
   form.hidden = false;
   intro.hidden = false;
   success.hidden = true;
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
+
+  sendAnalyticsEvent('plan_selected', selectedPlan, selectedPrice);
 }
 
 document.querySelectorAll('.plan').forEach(card => {
@@ -44,10 +69,14 @@ document.addEventListener('keydown', e => {
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  const data = Object.fromEntries(new FormData(form));
-  data.plan = planInput.value;
-  console.log('lead_submitted', data);
+  if (!form.checkValidity()) return;
+
   form.hidden = true;
   intro.hidden = true;
   success.hidden = false;
+
+  if (interestEventSent) return;
+  if (sendAnalyticsEvent('interest_submitted', selectedPlan, selectedPrice)) {
+    interestEventSent = true;
+  }
 });

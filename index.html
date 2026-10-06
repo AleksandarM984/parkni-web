@@ -6,6 +6,50 @@
   <title>Parkni — Parking za veće događaje</title>
   <meta name='description' content='Rezerviši parking unapred za Crvena zvezda – Žalgiris u Beogradskoj areni.'>
   <link rel='stylesheet' href='styles.css'>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    var PARKNI_GA_ID = 'G-Z69MHTJ1G4';
+    window['ga-disable-' + PARKNI_GA_ID] = true;
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied'
+    });
+    gtag('set', 'ads_data_redaction', true);
+
+    var parkniHost = location.hostname;
+    var parkniDebug = location.protocol === 'file:' ||
+      parkniHost === 'localhost' ||
+      parkniHost === '127.0.0.1' ||
+      parkniHost === '::1' ||
+      parkniHost === '[::1]';
+    try {
+      if (new URLSearchParams(location.search).get('ga_debug') === '1') parkniDebug = true;
+    } catch (error) {}
+
+    window['ga-disable-' + PARKNI_GA_ID] = false;
+    gtag('consent', 'update', { analytics_storage: 'granted' });
+    gtag('js', new Date());
+    var parkniGaConfig = {
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    };
+    if (parkniDebug) parkniGaConfig.debug_mode = true;
+    gtag('config', PARKNI_GA_ID, parkniGaConfig);
+    window.parkniAnalyticsEnabled = true;
+
+    var parkniGtagScript = document.createElement('script');
+    parkniGtagScript.async = true;
+    parkniGtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + PARKNI_GA_ID;
+    document.head.appendChild(parkniGtagScript);
+    try { localStorage.removeItem('parkni_analytics_consent'); } catch (error) {}
+  </script>
 </head>
 <body>
   <header>
