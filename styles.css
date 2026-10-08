@@ -107,11 +107,20 @@ button[data-plan] {
 .hero {
   min-height: 540px;
   position: relative;
+  overflow: hidden;
   background-color: #071425;
-  background-image: url('assets/hero/parkni-zvezda-zalgiris-event.png');
-  background-repeat: no-repeat;
-  background-size: auto 112%;
-  background-position: right 68%;
+}
+
+.hero-photo {
+  position: absolute;
+  z-index: 0;
+  height: 112%;
+  width: auto;
+  max-width: none;
+  right: 0;
+  top: 68%;
+  transform: translateY(-68%);
+  pointer-events: none;
 }
 
 .shade {
@@ -480,8 +489,17 @@ footer {
 
   .hero {
     min-height: 570px;
-    background-size: cover;
-    background-position: 82% center;
+  }
+
+  .hero-photo {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    right: auto;
+    top: 0;
+    transform: none;
+    object-fit: cover;
+    object-position: 82% center;
   }
 
   .shade {
